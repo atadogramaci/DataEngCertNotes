@@ -65,18 +65,19 @@ Lakehouse advantages:
 
 
 2 Planes:
-	1. **Control Plane**:
-		* Databricks Cloud Account
-		* Very little data resides here
-		* Data is encrypted at rest
-		* Allows access to:
-			1. Web Application: Delivers 3 different services depending on the persona:
-				1. Databricks SQL, for running quick, adhoc queries and visualisations
-				2. Databricks Machine Learning, for integrated end to end machine learning environment - for tracking experiments, training models, managing feature development, and serving features and models
-				3. Databricks Engineering and Data Science, also known as the workspace
-			2. Repos/Notebooks
-			3. Jobs
-			4. Cluster Management, allows to manage the computational resources
+
+1. **Control Plane**:
+	* Databricks Cloud Account
+	* Very little data resides here
+	* Data is encrypted at rest
+	* Allows access to:
+		1. Web Application: Delivers 3 different services depending on the persona:
+			1. Databricks SQL, for running quick, adhoc queries and visualisations
+			2. Databricks Machine Learning, for integrated end to end machine learning environment - for tracking experiments, training models, managing feature development, and serving features and models
+			3. Databricks Engineering and Data Science, also known as the workspace
+		2. Repos/Notebooks
+		3. Jobs
+		4. Cluster Management, allows to manage the computational resources
 
 **Clusters** are made up of one or more virtual machine instances.  A cluster will have a driver and multiple executors. The **driver** coordinates the activities of executors. **Executors** run tasks composing a spark job.  These jobs are performed using the cores, memory, and local storage available. 
 
