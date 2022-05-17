@@ -1,4 +1,4 @@
-# Module 1 - Using the Databricks Lakehouse Platform
+# Module 1 Using the Databricks Lakehouse Platform
 
 ## Databricks Lakehouse Platform:
 	1. Lakehouse is the "one simple platform to unify all of your data, analytics, and AI workloads”
