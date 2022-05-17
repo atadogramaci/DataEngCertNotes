@@ -101,40 +101,45 @@ There is a distinction between types of clusters:
 
 ## Introduction to Delta Lake
 What is Delta Lake:
-	* 	Open source project that enables building a data Lakehouse on top of on existing storage system
+
+* 	Open source project that enables building a data Lakehouse on top of on existing storage system
 
 It is NOT:
-	* proprietary technology
-	* storage format
-	* storage medium
-	* database service or data warehouse
+
+* proprietary technology
+* storage format
+* storage medium
+* database service or data warehouse
 
 It is:
-	* open source
-	* builds upon standard data formats
-	* optimised for cloud object storage
-	* built for scalable metadata handling
+
+* open source
+* builds upon standard data formats
+* optimised for cloud object storage
+* built for scalable metadata handling
 
 Brings ACID to object storage:
-	* atomicity - all or nothing method of success/failure
-	* consistency - predictable and expected behaviour - this is the one that varies the most between systems
-	* isolation - how simultaneous operations are run. 
-	* durability - committed changes are permanent
+
+* atomicity - all or nothing method of success/failure
+* consistency - predictable and expected behaviour - this is the one that varies the most between systems
+* isolation - how simultaneous operations are run. 
+* durability - committed changes are permanent
 
 Most common problems that ACID solves for:
 
-	1. Hard to append data
-	2. Modification of existing data difficult
-	3. Jobs failing mid way
-	4. Real-time operations hard
-	5. Costly to keep historical data versions
+1. Hard to append data
+2. Modification of existing data difficult
+3. Jobs failing mid way
+4. Real-time operations hard
+5. Costly to keep historical data versions
 
 **Delta lake is the default for all tables created in Databricks**
 
 ### Managing Delta Tables
 
 Creating Tables:
-	* Providing table name as well as the columns and their types
+
+* Providing table name as well as the columns and their types
 ```
 CREATE TABLE table_name
 	(column1 INT, column2 STRING, column3 DOUBLE)
@@ -209,7 +214,7 @@ The below command allows to see important metadata about the table.
 ```
 DESCRIBE EXTENDED table_name
 ```
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-05-05%20at%2011.11.46.png)
+![Screenshot 2022-05-05 at 11 11 46](https://user-images.githubusercontent.com/19376014/168787144-6ff87269-51d3-4996-8e4b-5b426917bfc7.png)
 
 It is important to take into account the location. Since this is a delta lake table, it is backed by a collection of files stored in cloud object storage.
 
@@ -228,7 +233,8 @@ Looking at the log files using a command such as below, we can see the changes c
 %python
 display(spark.sql(f"SELECT * FROM json.`{DA.paths.user_db}/students/_delta_log/00000000000000000007.json`"))
 ```
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-05-05%20at%2011.20.31.png)
+
+![Screenshot 2022-05-05 at 11 20 31](https://user-images.githubusercontent.com/19376014/168787225-5bc0329e-70b6-4669-9f51-a07e347a5cf4.png)
 
 #### Optimize
 Small files may occur for a variety of reasons based on the operations performed. In order to combine these files towards the optimal size (scaled based on the total size of the table), we can use the `OPTIMIZE` command.
@@ -271,4 +277,3 @@ Logging can be enabled via:
 And you can perform a `DRY RUN` to print out all records to be deleted:
 `VACUUM table_name RETAIN 0 HOURS DRY RUN`
 
-#training/data engineering cert#
