@@ -13,7 +13,8 @@ Most enterprises struggle with data and they have 4 main usage architectures:
 	3. Streaming
 	4. Data Science and ML
 
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-04-26%20at%2016.39.55.png)
+![Screenshot 2022-04-26 at 16 39 55](https://user-images.githubusercontent.com/19376014/168785086-922ea54e-7a3c-4a69-90b7-89f5cd9355a7.png)
+
 
 Main problems:
 		* Clients often have to cross maintain different stacks and make sure they work well together. Often this is costly and difficult to manage.
