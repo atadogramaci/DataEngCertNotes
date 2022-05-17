@@ -42,7 +42,7 @@ Lakehouse advantages:
 * Advanced caching and indexing methods, 48 times faster
 * Improved data governance capabilities to easily provision access to users
 
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-04-26%20at%2016.51.03.png)
+![Screenshot 2022-04-26 at 16 51 03](https://user-images.githubusercontent.com/19376014/168786389-ab9aeb4d-0e37-4760-bb60-ebea738f8f08.png)
 
 3 principles:
 
@@ -62,7 +62,6 @@ Lakehouse advantages:
 
 ## Databricks Architecture and Services
 
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-04-26%20at%2017.04.06.png)
 
 
 2 Planes:
@@ -81,20 +80,21 @@ Lakehouse advantages:
 
 **Clusters** are made up of one or more virtual machine instances.  A cluster will have a driver and multiple executors. The **driver** coordinates the activities of executors. **Executors** run tasks composing a spark job.  These jobs are performed using the cores, memory, and local storage available. 
 
-![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-04-26%20at%2017.12.54.png)
+![Screenshot 2022-04-26 at 17 04 06](https://user-images.githubusercontent.com/19376014/168786432-e517f089-ab35-4d4c-bbe3-76bfe787122e.png)
 
 
 There is a distinction between types of clusters:
-		* 	**All-purpose clusters**: analyse data collaboratively using interactive notebooks
-			* Can create using the Workspace or API
-			* Retains up to 70 clusters for up to 30 days
-			* Multiple users can use them
-			* Can manually terminate and restart
-		* **Job Clusters**: to run automated jobs in a robust and expeditious way
-			* Job scheduler creates job clusters and terminates them when they are done
-			* Can not restart a job cluster
-			* Retain up to 30 clusters created by the job scheduler
-			* To retain information past 30 days, the administrator must pin the cluster
+
+* **All-purpose clusters**: analyse data collaboratively using interactive notebooks
+	* Can create using the Workspace or API
+	* Retains up to 70 clusters for up to 30 days
+	* Multiple users can use them
+	* Can manually terminate and restart
+* **Job Clusters**: to run automated jobs in a robust and expeditious way
+	* Job scheduler creates job clusters and terminates them when they are done
+	* Can not restart a job cluster
+	* Retain up to 30 clusters created by the job scheduler
+	* To retain information past 30 days, the administrator must pin the cluster
 
 - - - -
 
