@@ -18,12 +18,12 @@ Most enterprises struggle with data and they have 4 main usage architectures:
 
 Main problems:
 
-		- Clients often have to cross maintain different stacks and make sure they work well together. Often this is costly and difficult to manage.
-		- Expensive to manage
-		- Complexity passed on to data teams
-		- Siloed teams
-		* No consistent security or data model
-		* Various versions of the truth
+* Clients often have to cross maintain different stacks and make sure they work well together. Often this is costly and difficult to manage.
+* Expensive to manage
+* Complexity passed on to data teams
+* Siloed teams
+* No consistent security or data model
+* Various versions of the truth
 
 Lakehouse is the solution to solve for this complexity. Lakehouse is **one platform to unify all of your data, analytics, and AI workloads**. It combines the capabilities of the Data Lake and the Data Warehouse.
 
