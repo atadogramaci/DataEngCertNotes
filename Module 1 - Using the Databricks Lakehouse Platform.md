@@ -17,6 +17,7 @@ Most enterprises struggle with data and they have 4 main usage architectures:
 
 
 Main problems:
+
 		- Clients often have to cross maintain different stacks and make sure they work well together. Often this is costly and difficult to manage.
 		- Expensive to manage
 		- Complexity passed on to data teams
