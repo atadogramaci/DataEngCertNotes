@@ -28,30 +28,33 @@ Main problems:
 Lakehouse is the solution to solve for this complexity. Lakehouse is **one platform to unify all of your data, analytics, and AI workloads**. It combines the capabilities of the Data Lake and the Data Warehouse.
 
 Lakehouse advantages:
-		* fit for any size organisation
-		* increasing simplicity
-		* robust, secure, scalable
-		* lowering TCO
+
+* fit for any size organisation
+* increasing simplicity
+* robust, secure, scalable
+* lowering TCO
 
 **Delta Lake** at the heart of the Lakehouse:
-		* Underpinned by Apache Spark
-		* Better reliability with transactions
-		* Ability to time travel backwards
-		* Advanced caching and indexing methods, 48 times faster
-		* Improved data governance capabilities to easily provision access to users
+
+* Underpinned by Apache Spark
+* Better reliability with transactions
+* Ability to time travel backwards
+* Advanced caching and indexing methods, 48 times faster
+* Improved data governance capabilities to easily provision access to users
 
 ![](Module%201%20-%20Using%20the%20Databricks%20Lakehouse%20Platform/Screenshot%202022-04-26%20at%2016.51.03.png)
 
 3 principles:
-		* **Simple**: Unify your data, analytics, AI into one common platform for all data use cases. Data can be aggregated in one place.
-		* **Open**: Unifying ecosystems, with open source standards and formats. Built on innovation of some of the most successful open source data projects.
-			* Over 450 partners across the data landscape.
-		* _[THIS IS OLD - THE NEW PILLAR IS MULTI-CLOUD]_ **Collaborative**: all 3 user profiles (Data Analyst, Data Engineer, Data Scientists) can collaborate in a single space to share:
-			* Models
-			* Dashboards
-			* Notebooks
-			* Datasets
-		* **Multi-cloud**
+
+* **Simple**: Unify your data, analytics, AI into one common platform for all data use cases. Data can be aggregated in one place.
+* **Open**: Unifying ecosystems, with open source standards and formats. Built on innovation of some of the most successful open source data projects.
+	* Over 450 partners across the data landscape.
+* _[THIS IS OLD - THE NEW PILLAR IS MULTI-CLOUD]_ **Collaborative**: all 3 user profiles (Data Analyst, Data Engineer, Data Scientists) can collaborate in a single space to share:
+	* Models
+	* Dashboards
+	* Notebooks
+	* Datasets
+* **Multi-cloud**
 
 - - - -
 - - - -
