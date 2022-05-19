@@ -118,7 +118,7 @@ To persist the results of a streaming query, it must be written to a durable sto
 Although the medallion architecture simplifies the data ingestion pipeline, the reality for firms can still be complex as they need to maintain multiple tables on various layers with complex dependencies.
 
 Delta Live Table has been designed to make reliable ETL easy:
-	* Operating with agility - declarative tools to build batch and streaming data pipelines
-	* Built-in quality controls - having the ability to declare quality expectations and taking actions
-	* Scaling with reliability - to easily scale infrastructure alongside the data
+* Operating with agility - declarative tools to build batch and streaming data pipelines
+* Built-in quality controls - having the ability to declare quality expectations and taking actions
+* Scaling with reliability - to easily scale infrastructure alongside the data
 	
