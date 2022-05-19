@@ -242,7 +242,7 @@ SELECT * FROM parsed_events
 ```
 
 Output:
-![](Module%202%20ETL%20with%20Spark%20SQL%20and%20Python/Screenshot%202022-05-09%20at%2014.44.05.png)
+![Screenshot 2022-05-09 at 14 44 05](https://user-images.githubusercontent.com/19376014/169248458-b0636cb9-1c9a-4327-908b-230e6fbc0538.png)
 
 Spark SQL also makes use of the DESCRIBE for complex and/or nested structures.
 
