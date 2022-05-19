@@ -15,8 +15,9 @@ To view details of a database, run:
 
 
 There are two types of tables:
-	1. Managed Table: this is a Spark SQL table for which Spark manages both the data and the metadata. The metadata and data is stored in DBFS in customer account. Dropping the table will remove both the metadata and data.
-	2. Unmanaged Table: the alternative where Spark will manage the metadata but the data location is controlled by the user. When a drop table is performed, only the metadata is removed and not the data itself. The data will continue to live in the specified location. 
+
+1. Managed Table: this is a Spark SQL table for which Spark manages both the data and the metadata. The metadata and data is stored in DBFS in customer account. Dropping the table will remove both the metadata and data.
+2. Unmanaged Table: the alternative where Spark will manage the metadata but the data location is controlled by the user. When a drop table is performed, only the metadata is removed and not the data itself. The data will continue to live in the specified location. 
 
 Therefore the content replacement of tables will differ across both. There needs to be more commands executed in the unmanaged tables. 
 
@@ -118,8 +119,8 @@ Spark automatically caches the underlying data in local storage, in order to ens
 `REFRESH TABLE table_name`
 
 Working with large external SQL databases can incur significant overhead because of:
-	1. Network latency with moving data over internet
-	2. Execution of query logic not being optimised in source systems
+1. Network latency with moving data over internet
+2. Execution of query logic not being optimised in source systems
 
 ## Creating Delta Tables
 
@@ -163,65 +164,73 @@ Table constraints will be shown in the TBLPROPERTIES field and visible in `DESCR
 
 ### Enriching Tables
 The **SELECT** clause can leverage built-in Spark SQL commands useful for file ingestion such as:
-	* **current_timestamp()** records the timestamp when the logic is executed
-	* **input_file_name()** records the source data file for each record in the table
+
+* **current_timestamp()** records the timestamp when the logic is executed
+* **input_file_name()** records the source data file for each record in the table
 
 The **CREATE TABLE**  also supports contains several options such as :
-	* `COMMENT` which adds a comment
-	* `LOCATION` which will result in an external table
-	* `PARTITIONED BY` which will cause the data to exist within its own directory in the target storage location
+
+* `COMMENT` which adds a comment
+* `LOCATION` which will result in an external table
+* `PARTITIONED BY` which will cause the data to exist within its own directory in the target storage location
 
 Most delta lake tables (especially small-to-medium sized data) will not benefit from partitioning. This is because it physically separates data files and can result in small file problems. _As best practice, default to non-partitioned tables for most use cases._
 
 ### Cloning Delta Lake Tables
 Two ways of copying delta lake tables:
-	1. DEEP CLONE: fully copies data and metadata from a source table to a target. Incremental copy.
-	2. SHALLOW CLONE: only copies the delta transaction logs, and the data does not move. This can be useful for quick testing of changes without the risk of modifying the current table.
+
+1. DEEP CLONE: fully copies data and metadata from a source table to a target. Incremental copy.
+2. SHALLOW CLONE: only copies the delta transaction logs, and the data does not move. This can be useful for quick testing of changes without the risk of modifying the current table.
 
 ## Writing to Delta Tables
 
 Users have 4 options for operations when it  comes to writing into delta tables;
-	1. `INSERT OVERWRITE`
-		* This will overwrite the contents, replacing them. A fast operation as it does not list the directory recursively  or delete 
-		* Previous version will be available through Time Travel
-		* Atomic operation, meaning that concurrent queries can still read the table while being deleted
-		* ACID guarantees that if operation fails, the previous state will be used
-		* Unlike the CRAS (create or replace table as select), this query can only overwrite an existing table, it can not create a new one
-		* Can only overwrite with new records that match the current table schema
-		* Can overwrite individual partitions
-		* ex: `INSERT OVERWRITE table_name SELECT * from source`
-	2. `INSERT INTO`
-		* Appends records, allows fort incremental updates to existing tables
-		* There is no built-in guarantee from appending duplicate records
-		* ex: `INSERT INTO table_name SELECT * from source`
-	4. `MERGE INTO`:
-		* Updates, inserts, and deletes are treated as a single transaction
-		* Multiple conditions can be added in addition to matching fields
-		* Extensive options for implementing custom logic
-		* ex: `MERGE INTO target a USING source b ON {merge condition} WHEN MATCHED THEN {matched action} WHEN NOT MATCHED THEN {not_matched_action}`
-	5. `COPY INTO`:
-		* Idempotent option for incrementally ingesting data
-		* Data schema has to be consistent
-		* Duplicate records should try to be excluded or handled downstream
-		* Cheaper than full table scans for data
-		* Real value is in multiple executions over time picking up new files in the source automatically
+
+1. `INSERT OVERWRITE`
+	* This will overwrite the contents, replacing them. A fast operation as it does not list the directory recursively  or delete 
+	* Previous version will be available through Time Travel
+	* Atomic operation, meaning that concurrent queries can still read the table while being deleted
+	* ACID guarantees that if operation fails, the previous state will be used
+	* Unlike the CRAS (create or replace table as select), this query can only overwrite an existing table, it can not create a new one
+	* Can only overwrite with new records that match the current table schema
+	* Can overwrite individual partitions
+	* ex: `INSERT OVERWRITE table_name SELECT * from source`
+2. `INSERT INTO`
+	* Appends records, allows fort incremental updates to existing tables
+	* There is no built-in guarantee from appending duplicate records
+	* ex: `INSERT INTO table_name SELECT * from source`
+3. `MERGE INTO`:
+	* Updates, inserts, and deletes are treated as a single transaction
+	* Multiple conditions can be added in addition to matching fields
+	* Extensive options for implementing custom logic
+	* ex: `MERGE INTO target a USING source b ON {merge condition} WHEN MATCHED THEN {matched action} WHEN NOT MATCHED THEN {not_matched_action}`
+4. `COPY INTO`:
+	* Idempotent option for incrementally ingesting data
+	* Data schema has to be consistent
+	* Duplicate records should try to be excluded or handled downstream
+	* Cheaper than full table scans for data
+	* Real value is in multiple executions over time picking up new files in the source automatically
 
 
 ## Cleaning Data
 
 ### Inspecting the Data
-	* `count(col)` will count the number of populated items in a column. It will skip the **NULL** when counting.
-	* `count(*)` will count the total number of rows, including the *NULL* values.
-	* `count_if(col IS NULL)` to count the **NULL** values in a cell.
-	* `DISTINCT` will isolate the unique occurrences
-		_Spark skips null values while counting values in a column or counting distinct values for a field, but does not omit rows with nulls from a _**_DISTINCT_**_ query._
-	* `GROUP BY` can be used to aggregate records
-	* `date_format(column, “HH:mm:ss”)` will extract and create a date formatted column
-	* `regexp_extract` to extract characters/string from a column
+
+* `count(col)` will count the number of populated items in a column. It will skip the **NULL** when counting.
+* `count(*)` will count the total number of rows, including the *NULL* values.
+* `count_if(col IS NULL)` to count the **NULL** values in a cell.
+* `DISTINCT` will isolate the unique occurrences
+
+_Spark skips null values while counting values in a column or counting distinct values for a field, but does not omit rows with nulls from a _**_DISTINCT_**_ query._
+
+* `GROUP BY` can be used to aggregate records
+* `date_format(column, “HH:mm:ss”)` will extract and create a date formatted column
+* `regexp_extract` to extract characters/string from a column
 
 ## Advanced SQL Transformations
 Spark SQL can traverse nested JSON data within columns with use of “:”, such as:
-	* `SELECT column:value:value1`- this will traverse in the column that is selected and find the key of value within the dictionary and then again the value1 nested key
+
+* `SELECT column:value:value1`- this will traverse in the column that is selected and find the key of value within the dictionary and then again the value1 nested key
 It can also parse JSON objects into struct types. In order to do this, it is possible to utilise the `schema_of_json` to infer the schema as `from_json` requires a schema to be passed:
 
 ```
@@ -238,33 +247,36 @@ Output:
 Spark SQL also makes use of the DESCRIBE for complex and/or nested structures.
 
 Other data manipulations for nested structures:
-	* `explode` function lets us put each element in an array on its own row
-	* `collect_set` can collect unique values for a field, including fields within arrays
-	* `flatten` allows multiple arrays to be combined into a single array
-	* `array_distinct` removes duplicate elements from an array
+	
+* `explode` function lets us put each element in an array on its own row
+* `collect_set` can collect unique values for a field, including fields within arrays
+* `flatten` allows multiple arrays to be combined into a single array
+* `array_distinct` removes duplicate elements from an array
 
 Set Operators:
-	* `UNION` is joining two tables
-	* `INTERSECT` returns records that occur in both tables
-	* `MINUS` returns records found in one dataset but not the other.
+
+* `UNION` is joining two tables
+* `INTERSECT` returns records that occur in both tables
+* `MINUS` returns records found in one dataset but not the other.
 
 ### Higher Order Functions
 
 Higher order functions in Spark SQL allow you to work directly with complex data types. When working with hierarchical data, records are frequently stored as array or map type objects. Higher-order functions allow you to transform data while preserving the original structure.
 Higher order functions include:
-	* `FILTER` filters an array using the given lambda function: 
-		* `FILTER (items, I -> i.item_id LIKE “%K”) AS king_items`
-			In the statement above:
-			* `FILTER` : the name of the higher-order function
-			* `items` : the name of our input array
-			* `I` : the name of the iterator variable. You choose this name and then use it in the lambda function. It iterates over the array, cycling each value into the function one at a time.
-			* `->` : Indicates the start of a function
-			* `i.item_id LIKE “%K”` : This is the function. Each value is checked to see if it ends with the capital letter K. If it is, it gets filtered into the new column, **king_items**
 
-	* `EXIST` tests whether a statement is true for one or more elements in an array.
-	* `TRANSFORM` uses the given lambda function to transform all elements in an array:
-		* `TRANSFORM(king_items, k -> CAST(k.item_revenue_in_usd * 100 AS INT)) AS item_revenues`
-	* `REDUCE` takes two lambda functions to reduce the elements of an array to a single value by merging the elements into a buffer, and the apply a finishing function on the final buffer.
+* `FILTER` filters an array using the given lambda function: 
+	* `FILTER (items, I -> i.item_id LIKE “%K”) AS king_items`
+		In the statement above:
+		* `FILTER` : the name of the higher-order function
+		* `items` : the name of our input array
+		* `I` : the name of the iterator variable. You choose this name and then use it in the lambda function. It iterates over the array, cycling each value into the function one at a time.
+		* `->` : Indicates the start of a function
+		* `i.item_id LIKE “%K”` : This is the function. Each value is checked to see if it ends with the capital letter K. If it is, it gets filtered into the new column, **king_items**
+
+* `EXIST` tests whether a statement is true for one or more elements in an array.
+* `TRANSFORM` uses the given lambda function to transform all elements in an array:
+	* `TRANSFORM(king_items, k -> CAST(k.item_revenue_in_usd * 100 AS INT)) AS item_revenues`
+* `REDUCE` takes two lambda functions to reduce the elements of an array to a single value by merging the elements into a buffer, and the apply a finishing function on the final buffer.
 
 ## SQL UDFs and Control Flow
 Databricks supports User Defined Functions registered natively in SQL. In order to register a function:
@@ -296,6 +308,3 @@ RETURN CASE
   ELSE concat("I don't eat ", food)
 END;
 ```
-
-
-#training/data engineering cert#
